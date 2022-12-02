@@ -1,11 +1,7 @@
 import mongoose from 'mongoose';
 
 const UsersSchema = new mongoose.Schema({
-	id: {
-		type: Number,
-		required: true,
-	},
-	surname: {
+		surname: {
 		type: String,
 		required: true,
 	},
