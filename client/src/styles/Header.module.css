@@ -1,0 +1,14 @@
+.header{
+	max-width: 100vw;
+	background-color:  #1390E5;
+	min-height: 80px;
+	box-shadow: 0 4px 2px -1px #959999;
+	}
+.header__item{
+	color: #f8fafc;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 80px;
+	font-size: 35px;	 
+}
