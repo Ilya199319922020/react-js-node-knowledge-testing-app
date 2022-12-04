@@ -1,0 +1,52 @@
+.test {
+	margin: 0  auto;
+	margin-top: 20px;
+	max-width: 500px;
+	display: flex;
+	justify-content: center;
+	min-height: 400px;
+	border: 2px solid  #1390E5;
+	border-radius: 30px;
+	box-shadow: 0px 2px 2px 0px #1390E5;
+	padding: 0 0 20px 0;
+}
+.test__block{
+margin-top: 20px;
+}
+.test__header{
+font-size: 20px;
+color: #1390E5;
+}
+.test__main{
+	margin-top: 10px;
+}
+.testradio{
+	min-height: 20px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #06588f;
+}
+.testradio__input{
+	font-size: 16px;
+	margin-bottom: 10px;
+	color: #56b6f7;
+
+}
+.testradio__block_radio{
+	margin-right: 10px;
+}
+.test__btn{
+	background-color: #1390E5;
+	color: rgb(247, 244, 244);
+	box-shadow: 0px 2px 2px 0px #9fa1a1;
+	border-radius: 5px;
+		cursor: pointer;
+		width: 100px;
+		height: 30px;
+}
+.test__btn:hover{
+	background-color: #106ead;
+}
+.test__btn:focus{
+	background-color: #054774;
+}
