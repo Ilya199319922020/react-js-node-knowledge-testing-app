@@ -17,14 +17,10 @@ const Test = () => {
       type: 'setAnswer',
       obj: { id: target.id, answerCurrent: target.value },
     });
-
   };
 
-  console.log(stateProblem.results)
-
-  const onSetResults = (e) => {
+  const onSetResults = async (e) => {
     e.preventDefault();
-
   }
   return (
     <div
@@ -56,6 +52,7 @@ const Test = () => {
         </div>
         <button
           className={styles.test__btn}
+          onClick={onSetResults}
         >
           Oтправить
         </button>

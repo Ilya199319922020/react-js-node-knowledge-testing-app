@@ -1,32 +1,36 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useInput } from '../hooks/useInput';
 import styles from '../styles/Registration.module.css'
+import { setDataRegastrationUser } from '../assets/intance/intance';
+import { saveUser } from '../storeRedux/reducer/userReducer';
 
 const Registration = () => {
 	const [valueSurName, setValueSurName] = useInput('');
 	const [valueName, setValueName] = useInput('');
 	const [valuePatronymic, setValuePatronymic] = useInput('');
+	const [isReqRegistration, setIsReqRegistration] = useState(false);
 	// const [isError, setIsError] = useState(false);
 
-	const sendData = () => {
-		fetch()
-	}
-
-	const onSetData = async (e) => {
+	const onSetData =  (e) => {
 		e.preventDefault();
+		setIsReqRegistration(true);
+	};
+
+	useEffect(() => {
 		if (valueSurName && valueName && valuePatronymic) {
-			// setIsError(true)
 			const userData = {
 				surname: valueSurName,
 				name: valueName,
 				patronymic: valuePatronymic,
 			};
-			sendData(userData)
-		} else {
-			// setIsError(true)
-		}
-	};
+			if (isReqRegistration) {
+				saveUser(userData)
+				setIsReqRegistration(true);
+			}
+		}	
+	}, [isReqRegistration])
 
 	return (
 		<div
