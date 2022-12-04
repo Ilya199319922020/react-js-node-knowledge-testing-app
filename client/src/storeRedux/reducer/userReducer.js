@@ -1,4 +1,4 @@
-import { setDataRegastrationUser } from "../../assets/intance/intance";
+import axios from "axios";
 
 const initialState = {
 	user: [],
@@ -10,7 +10,7 @@ const userReducer = (state = initialState, action) => {
 		case 'SET_USER':
 			return {
 				...state,
-				user: action.user,
+				user: [action.user],
 			}
 		default:
 			return state;
@@ -23,8 +23,8 @@ const actions = {
 
 export const saveUser = (data) => {
 	return async (dispatch) => {
-		const response = await setDataRegastrationUser(data)
-		if (response.status === 200) {
+		const response = await axios.post('http://127.0.0.1:5000/api/createUser', data)
+		if (response.status === 201) {
 			dispatch(actions.setUserData(response.data));
 		}
 	}

@@ -3,34 +3,42 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useInput } from '../hooks/useInput';
 import styles from '../styles/Registration.module.css'
-import { setDataRegastrationUser } from '../assets/intance/intance';
 import { saveUser } from '../storeRedux/reducer/userReducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
 const Registration = () => {
 	const [valueSurName, setValueSurName] = useInput('');
 	const [valueName, setValueName] = useInput('');
 	const [valuePatronymic, setValuePatronymic] = useInput('');
 	const [isReqRegistration, setIsReqRegistration] = useState(false);
-	// const [isError, setIsError] = useState(false);
 
-	const onSetData =  (e) => {
+	const dispatch = useDispatch();
+	const { user } = useSelector(state => state.user);
+
+	const onSetData = (e) => {
 		e.preventDefault();
 		setIsReqRegistration(true);
 	};
 
 	useEffect(() => {
-		if (valueSurName && valueName && valuePatronymic) {
+		if (valueSurName.value && valueName.value && valuePatronymic.value) {
 			const userData = {
-				surname: valueSurName,
-				name: valueName,
-				patronymic: valuePatronymic,
+				surname: valueSurName.value,
+				name: valueName.value,
+				patronymic: valuePatronymic.value,
+				answers: []
 			};
 			if (isReqRegistration) {
-				saveUser(userData)
-				setIsReqRegistration(true);
+				dispatch(saveUser(userData))
+				setIsReqRegistration(false);
 			}
-		}	
-	}, [isReqRegistration])
+		}
+	}, [isReqRegistration]);
+
+	if(user.length){
+		return <Navigate to='/testing'/>
+	}
 
 	return (
 		<div
@@ -68,7 +76,6 @@ const Registration = () => {
 				<button
 					className={styles.registration__form_btn}
 					onClick={onSetData}
-					type={'submit'}
 				>
 					Зарегистрировать
 				</button>
