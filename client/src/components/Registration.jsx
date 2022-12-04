@@ -1,6 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
 import { useInput } from '../hooks/useInput';
+import { saveUser } from '../storeRedux/reducer/userReducer';
 import styles from '../styles/Registration.module.css'
 
 const Registration = () => {
@@ -8,10 +8,6 @@ const Registration = () => {
 	const [valueName, setValueName] = useInput('');
 	const [valuePatronymic, setValuePatronymic] = useInput('');
 	// const [isError, setIsError] = useState(false);
-
-	const sendData = () => {
-		fetch()
-	}
 
 	const onSetData = async (e) => {
 		e.preventDefault();
@@ -21,8 +17,9 @@ const Registration = () => {
 				surname: valueSurName,
 				name: valueName,
 				patronymic: valuePatronymic,
+				answers: []
 			};
-			sendData(userData)
+			saveUser(userData)
 		} else {
 			// setIsError(true)
 		}
