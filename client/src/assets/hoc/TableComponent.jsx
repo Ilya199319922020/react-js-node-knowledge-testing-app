@@ -1,9 +1,13 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { actions } from '../../storeRedux/reducer/userReducer';
 import style from '../../styles/TableComponent.module.css';
 
 const TableComponent = ({ }) => {
 	const { resultUserTest } = useSelector(state => state.resultUserTest);
+	const { isTable } = useSelector(state => state.isTable);
+	const dispatch = useDispatch();
 
 	const rightAnswers = resultUserTest.length && resultUserTest
 		.map(s => s === true
@@ -15,13 +19,22 @@ const TableComponent = ({ }) => {
 		? <td key={s}>{0}</td>
 		: <td key={s}>{1}</td>
 	);
+	const onExit = (e) => {
+		e.preventDefault();
+		dispatch(actions.setIsTable(false));
+		dispatch(actions.setUserData(null));
+	};
+
+	if (!isTable) {
+		return <Navigate to='/registration' />
+	}
 
 	return (
 		<div
 			className={style.container}
 		>
 			<h4>
-				Количество тестрируемых
+				Количество тестрируемых: {resultUserTest.length&&1}
 			</h4>
 			<table
 				className={style.container__table}>
@@ -77,6 +90,7 @@ const TableComponent = ({ }) => {
 			>
 				<button
 					className={style.container__item_btn}
+					onClick={onExit}
 				>
 					Закрыть отчёт
 				</button>

@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action) => {
 		case 'SET_USER':
 			return {
 				...state,
-				user: [action.user],
+				user: action.user === null ? [...state.user].pop() : [action.user],
 			}
 		case 'SET_ANSWERS':
 			return {
@@ -25,11 +25,11 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				resultUserTest: action.result,
 			}
-			case 'SET_ISTABLE':
-				return {
-					...state, 
-					isTable: action.isVAlue
-				}
+		case 'SET_ISTABLE':
+			return {
+				...state,
+				isTable: action.isVAlue
+			}
 		default:
 			return state;
 	}
@@ -69,6 +69,12 @@ export const fetchAllResults = () => {
 		}
 	}
 };
+
+// export const setIsTableExit = (data) => {
+// 	return async (dispatch) => {
+
+// 	}
+// };
 
 
 

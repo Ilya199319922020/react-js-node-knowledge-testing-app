@@ -11,7 +11,7 @@ import { TestRadio } from './TestRadio/TestRadio';
 const Test = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
-  const [userData] = user;
+   const [userData] = user;
   const { isTable } = useSelector(state => state.isTable);
 
   const [stateProblem, dispatchRadio] = useReducer(reducer, {
