@@ -8,7 +8,8 @@ const initialState = {
 	isDiagram: false,
 	diagramData: [],
 	countUser: null,
-};
+}
+
 
 const userReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -65,10 +66,17 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				diagramData:  data
 			}
+		case 'SET_USER':
+			return {
+				...state,
+				user: action.user,
+
+			}
 		default:
 			return state;
 	}
 };
+
 
 export const actions = {
 	setUserData: (user) => ({ type: 'SET_USER', user }),
@@ -79,7 +87,8 @@ export const actions = {
 	setCount: (count) => ({ type: 'SET_COUNT', count }),
 	setDiagramValue: (results) => ({ type: 'SET_DIAGRAM_DATE', results }),
 	setReset: () => ({ type: 'RESET' }),
-};
+}
+
 
 export const saveUser = (data) => {
 	return async (dispatch) => {

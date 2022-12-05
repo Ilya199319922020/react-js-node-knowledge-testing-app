@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useInput } from '../hooks/useInput';
+import { saveUser } from '../storeRedux/reducer/userReducer';
 import styles from '../styles/Registration.module.css'
 import { saveUser } from '../storeRedux/reducer/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,7 +18,8 @@ const Registration = () => {
 	const dispatch = useDispatch();
 	const { user } = useSelector(state => state.user);
 
-	const onSetData = (e) => {
+
+	const onSetData = async (e) => {
 		e.preventDefault();
 		setIsReqRegistration(true);
 	};
