@@ -5,6 +5,7 @@ import userReducer from './reducer/userReducer';
 
 const reducers = combineReducers({
 	user: userReducer,
+	resultUserTest: userReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

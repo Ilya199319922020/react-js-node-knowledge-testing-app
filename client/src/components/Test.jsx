@@ -1,27 +1,40 @@
 import React from 'react';
 import { useReducer } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { reducer } from '../assets/reducer/reducer';
 import { arrListProblem } from '../assets/textListProblem/text';
+import { saveTest } from '../storeRedux/reducer/userReducer';
 import styles from '../styles/Test.module.css';
 import { TestRadio } from './TestRadio/TestRadio';
 
 const Test = () => {
-  const [stateProblem, dispatch] = useReducer(reducer, {
+  const dispatch = useDispatch();
+  const { user } = useSelector(state => state.user);
+  const [userData] = user;
+  const { resultUserTest } = useSelector(state => state.resultUserTest);
+
+  const [stateProblem, dispatchRadio] = useReducer(reducer, {
     data: arrListProblem,
     results: [...new Array(5)],
   });
 
   const handler = (e) => {
     const { target } = e;
-    dispatch({
+    dispatchRadio({
       type: 'setAnswer',
       obj: { id: target.id, answerCurrent: target.value },
     });
   };
+  const isArr = stateProblem.results.every(n => !!n);
 
-  const onSetResults = async (e) => {
+  const onSetResults = (e) => {
     e.preventDefault();
-  }
+    if (isArr) {
+      dispatch(saveTest(userData._id, stateProblem.results))
+    }
+  };
+
+
   return (
     <div
       className={styles.test}
