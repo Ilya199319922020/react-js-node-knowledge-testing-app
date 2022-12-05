@@ -1,6 +1,6 @@
 import styles from '../../styles/Test.module.css';
 
-export const TestRadio = ({ id, problem, options, onChange, type, value }) => {
+export const TestRadio = ({ id, problem, options, onChange }) => {
 	return (
 		<>
 			<div
@@ -23,7 +23,7 @@ export const TestRadio = ({ id, problem, options, onChange, type, value }) => {
 					options.length && options
 						.map((r, idx) => <div
 							className={styles.testradio__block}
-							key={r}
+							key={r.option_id}
 						>
 							<input
 								className={styles.testradio__block_radio}

@@ -48,14 +48,6 @@ const TableComponent = () => {
 		e.preventDefault();
 		dispatch(fetchAllResults());
 	};
-	console.log(resultsAllTest.map(h => {
-		return {
-			...h,
-			right: h.right.length,
-			wrong: h.wrong.length
-		}
-	})
-	);
 
 	if (!isTable) {
 		return <Navigate to='/registration' />
@@ -150,8 +142,6 @@ const TableComponent = () => {
 					</button>
 				</div>
 			</div >
-
-
 		</>
 	);
 };
