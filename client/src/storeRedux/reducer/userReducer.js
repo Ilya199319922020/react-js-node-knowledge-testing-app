@@ -4,6 +4,8 @@ const initialState = {
 	user: [],
 	resultsAllTest: [],
 	resultUserTest: [],
+	isTable: false,
+	isDiagram: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -21,17 +23,23 @@ const userReducer = (state = initialState, action) => {
 		case 'SET_ANSWERS_USER':
 			return {
 				...state,
-				resultUserTest: [action.result],
+				resultUserTest: action.result,
 			}
+			case 'SET_ISTABLE':
+				return {
+					...state, 
+					isTable: action.isVAlue
+				}
 		default:
 			return state;
 	}
 };
 
-const actions = {
+export const actions = {
 	setUserData: (user) => ({ type: 'SET_USER', user }),
-	setTestData: (results) => ({ type: 'SET_ANSWERS', results }),
+	setTestAllData: (results) => ({ type: 'SET_ANSWERS', results }),
 	setUserTestResult: (result) => ({ type: 'SET_ANSWERS_USER', result }),
+	setIsTable: (isVAlue) => ({ type: 'SET_ISTABLE', isVAlue }),
 };
 
 export const saveUser = (data) => {
@@ -43,20 +51,12 @@ export const saveUser = (data) => {
 	}
 };
 
-export const fetchResultTestUser = (id) => {
-	return async (dispatch) => {
-		const response = await axios.get(`http://127.0.0.1:5000/api/user/${id}`)
-		if (response.status === 200) {
-			dispatch(actions.setUserData(response.data));
-		}
-	}
-};
-
 export const saveTest = (id, answers) => {
 	return async (dispatch) => {
 		const response = await axios.post('http://127.0.0.1:5000/api/set', { id, answers })
-		if (response.status === 200) {
-					dispatch(actions.setUserTestResult(response.data.answers));
+		if (response.status === 201) {
+			dispatch(actions.setUserTestResult(response.data.answers));
+			dispatch(actions.setIsTable(true));
 		}
 	}
 };
@@ -65,7 +65,7 @@ export const fetchAllResults = () => {
 	return async (dispatch) => {
 		const response = await axios.get(`http://127.0.0.1:5000/api/user`)
 		if (response.status === 200) {
-			dispatch(actions.setUserData(response.data));
+			dispatch(actions.setTestAllData(response.data));
 		}
 	}
 };

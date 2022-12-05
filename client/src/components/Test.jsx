@@ -1,6 +1,7 @@
 import React from 'react';
 import { useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { reducer } from '../assets/reducer/reducer';
 import { arrListProblem } from '../assets/textListProblem/text';
 import { saveTest } from '../storeRedux/reducer/userReducer';
@@ -11,12 +12,14 @@ const Test = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
   const [userData] = user;
-  const { resultUserTest } = useSelector(state => state.resultUserTest);
+  const { isTable } = useSelector(state => state.isTable);
 
   const [stateProblem, dispatchRadio] = useReducer(reducer, {
     data: arrListProblem,
     results: [...new Array(5)],
   });
+
+  const isArr = stateProblem.results.every(n => !!n);
 
   const handler = (e) => {
     const { target } = e;
@@ -25,7 +28,6 @@ const Test = () => {
       obj: { id: target.id, answerCurrent: target.value },
     });
   };
-  const isArr = stateProblem.results.every(n => !!n);
 
   const onSetResults = (e) => {
     e.preventDefault();
@@ -34,6 +36,9 @@ const Test = () => {
     }
   };
 
+  if (isTable) {
+    return <Navigate to='/report' />
+  }
 
   return (
     <div
