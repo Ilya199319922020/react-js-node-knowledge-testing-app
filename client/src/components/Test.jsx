@@ -11,7 +11,7 @@ import { TestRadio } from './TestRadio/TestRadio';
 const Test = () => {
   const dispatch = useDispatch();
   const { user } = useSelector(state => state.user);
-   const [userData] = user;
+  const [userData] = user;
   const { isTable } = useSelector(state => state.isTable);
 
   const [stateProblem, dispatchRadio] = useReducer(reducer, {
@@ -40,10 +40,10 @@ const Test = () => {
     return <Navigate to='/report' />
   }
 
-  if(!user.length){
-		return <Navigate to='/registration'/>
-	}
-  
+  if (!user.length) {
+    return <Navigate to='/registration' />
+  }
+
   return (
     <div
       className={styles.test}

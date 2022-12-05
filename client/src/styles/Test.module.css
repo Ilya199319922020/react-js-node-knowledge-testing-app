@@ -34,6 +34,7 @@ color: #1390E5;
 }
 .testradio__block_radio{
 	margin-right: 10px;
+	cursor: pointer;
 }
 .test__btn{
 	background-color: #1390E5;

@@ -6,13 +6,13 @@ import styles from '../styles/Registration.module.css'
 import { saveUser } from '../storeRedux/reducer/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import TableComponent from './ReportComponents/TableComponent';
 
 const Registration = () => {
 	const [valueSurName, setValueSurName] = useInput('');
 	const [valueName, setValueName] = useInput('');
 	const [valuePatronymic, setValuePatronymic] = useInput('');
 	const [isReqRegistration, setIsReqRegistration] = useState(false);
+	const [errorRegistration, setErrorRegistration] = useState('');
 
 	const dispatch = useDispatch();
 	const { user } = useSelector(state => state.user);
@@ -34,11 +34,14 @@ const Registration = () => {
 				dispatch(saveUser(userData))
 				setIsReqRegistration(false);
 			}
+		} else if (isReqRegistration) {
+			setErrorRegistration('Не заполнены поля');
+			setIsReqRegistration(false);
 		}
 	}, [isReqRegistration]);
 
-	if(user.length){
-		return <Navigate to='/testing'/>
+	if (user.length) {
+		return <Navigate to='/testing' />
 	}
 
 	return (
@@ -74,6 +77,14 @@ const Registration = () => {
 					placeholder={'Отчество'}
 					required={true}
 				/>
+				{
+					errorRegistration &&
+					<div
+						className={styles.registration__error}
+					>
+						{errorRegistration}
+					</div>
+				}
 				<button
 					className={styles.registration__form_btn}
 					onClick={onSetData}

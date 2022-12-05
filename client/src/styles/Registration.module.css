@@ -50,3 +50,6 @@ border-radius: 5px;
 .registration__form_btn:focus{
 	background-color: #054774;
 }
+.registration__error{
+	color: red;
+}

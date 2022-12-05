@@ -21,7 +21,7 @@ const userReducer = (state = initialState, action) => {
 				diagramData: [],
 				isTable: false,
 				isDiagram: false,
-				countUser: null
+				countUser: null,
 			}
 		case 'SET_USER':
 			return {
