@@ -3,12 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { actions, fetchAllResults } from '../../storeRedux/reducer/userReducer';
 import style from '../../styles/TableComponent.module.css';
+import Diagram from './Diagram/Diagram';
 
 const TableComponent = () => {
 	const { resultUserTest } = useSelector(state => state.resultUserTest);
 	const { isTable } = useSelector(state => state.isTable);
 	const { isDiagram } = useSelector(state => state.isDiagram);
 	const { resultsAllTest } = useSelector(state => state.resultsAllTest);
+	const { countUser } = useSelector(state => state.countUser);
+	const { diagramData } = useSelector(state => state.diagramData);
+
 	const dispatch = useDispatch();
 
 	const rightAnswers = resultUserTest.length && resultUserTest
@@ -33,19 +37,25 @@ const TableComponent = () => {
 		.map(r => <td key={r.id}>
 			{r.wrong.length}
 		</td>
-
 		);
 
 	const onExit = (e) => {
 		e.preventDefault();
-		dispatch(actions.setIsTable(false));
-		dispatch(actions.setUserData(null));
-		};
+		dispatch(actions.setReset());
+	};
 
 	const onReqReport = (e) => {
 		e.preventDefault();
 		dispatch(fetchAllResults());
 	};
+	console.log(resultsAllTest.map(h => {
+		return {
+			...h,
+			right: h.right.length,
+			wrong: h.wrong.length
+		}
+	})
+	);
 
 	if (!isTable) {
 		return <Navigate to='/registration' />
@@ -57,7 +67,7 @@ const TableComponent = () => {
 				className={style.container}
 			>
 				<h4>
-					Количество тестрируемых: {resultUserTest.length && 1}
+					Количество тестрируемых: {countUser ? countUser : 1}
 				</h4>
 				<table
 					className={style.container__table}>
@@ -116,6 +126,13 @@ const TableComponent = () => {
 						</td>
 					</tr>
 				</table>
+				{
+					isDiagram && <div
+						className={style.container__diagram}
+					>
+						<Diagram data={diagramData.length && diagramData} />
+					</div>
+				}
 				<div
 					className={style.container__item}
 				>
@@ -133,12 +150,8 @@ const TableComponent = () => {
 					</button>
 				</div>
 			</div >
-			{/* {
-				isDiagram &&
-				<div>
 
-				</div>
-			} */}
+
 		</>
 	);
 };

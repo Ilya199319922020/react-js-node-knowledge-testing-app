@@ -28,6 +28,10 @@ table,  th {
 	flex-direction: column;
 	align-items: center;
 }
+
+.container__diagram{
+	
+}
 .container__item{
 	margin-top: 10px;
 }
