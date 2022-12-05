@@ -3,7 +3,7 @@ import Registration from './components/Registration';
 import Test from './components/Test';
 import './App.css';
 import Header from './components/Header/Header';
-import TableComponent from './assets/hoc/TableComponent';
+import TableComponent from './components/ReportComponents/TableComponent';
 
 function App() {
   return (

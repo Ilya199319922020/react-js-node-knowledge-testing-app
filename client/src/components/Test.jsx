@@ -40,6 +40,10 @@ const Test = () => {
     return <Navigate to='/report' />
   }
 
+  if(!user.length){
+		return <Navigate to='/registration'/>
+	}
+  
   return (
     <div
       className={styles.test}

@@ -7,6 +7,8 @@ const reducers = combineReducers({
 	user: userReducer,
 	resultUserTest: userReducer,
 	isTable: userReducer,
+	resultsAllTest: userReducer,
+	isDiagram: userReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

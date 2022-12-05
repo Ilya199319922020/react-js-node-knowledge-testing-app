@@ -18,7 +18,7 @@ const userReducer = (state = initialState, action) => {
 		case 'SET_ANSWERS':
 			return {
 				...state,
-				resultsAllTest: [...state.resultsAllTest, action.results],
+				resultsAllTest: action.results,
 			}
 		case 'SET_ANSWERS_USER':
 			return {
@@ -30,6 +30,11 @@ const userReducer = (state = initialState, action) => {
 				...state,
 				isTable: action.isVAlue
 			}
+		case 'SET_IS_DIAGRAM':
+			return {
+				...state,
+				isDiagram: action.isDiagram
+			}
 		default:
 			return state;
 	}
@@ -40,6 +45,7 @@ export const actions = {
 	setTestAllData: (results) => ({ type: 'SET_ANSWERS', results }),
 	setUserTestResult: (result) => ({ type: 'SET_ANSWERS_USER', result }),
 	setIsTable: (isVAlue) => ({ type: 'SET_ISTABLE', isVAlue }),
+	setIsDiagram: (isDiagram) => ({ type: 'SET_IS_DIAGRAM', isDiagram }),
 };
 
 export const saveUser = (data) => {
@@ -66,16 +72,17 @@ export const fetchAllResults = () => {
 		const response = await axios.get(`http://127.0.0.1:5000/api/user`)
 		if (response.status === 200) {
 			dispatch(actions.setTestAllData(response.data));
+			dispatch(actions.setIsDiagram(true));
 		}
 	}
 };
 
-// export const setIsTableExit = (data) => {
-// 	return async (dispatch) => {
-
-// 	}
-// };
-
-
-
+export const resetDataValue = () => {
+	return async (dispatch) => {
+		dispatch(actions.setIsTable(false));
+		dispatch(actions.setUserData(null));
+		dispatch(actions.setIsDiagram(false));
+		dispatch(actions.setTestAllData(null));
+	}
+};
 export default userReducer;
