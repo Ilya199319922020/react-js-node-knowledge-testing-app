@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { useInput } from '../hooks/useInput';
 import { saveUser } from '../storeRedux/reducer/userReducer';
 import styles from '../styles/Registration.module.css'
-import { saveUser } from '../storeRedux/reducer/userReducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
