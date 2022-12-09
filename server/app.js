@@ -1,6 +1,5 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
 import router from './routes/router.js';
 import bodyParser from 'body-parser';
 
@@ -14,20 +13,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const corsOptions = {
-	origin: 'http://localhost:3000',
-	credentials: true,
-	optionSuccessStatus: 200
-}
-app.use(cors(corsOptions));
-
-app.use('/api', function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-	res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization,  Set-Cookie',);
-	res.setHeader('Access-Control-Allow-Credentials', true);
+function cors(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
+	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
 	next();
-});
+}
+app.use(cors);
 
 app.use('/api', router);
 
