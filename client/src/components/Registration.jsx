@@ -6,6 +6,7 @@ import { saveUser } from '../storeRedux/reducer/userReducer';
 import styles from '../styles/Registration.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import Loader from '../assets/HOC/Loader';
 
 const Registration = () => {
 	const [valueSurName, setValueSurName] = useInput('');
@@ -46,6 +47,7 @@ const Registration = () => {
 	}
 
 	return (
+		<Loader>
 		<div
 			className={styles.registration}
 		>
@@ -94,6 +96,7 @@ const Registration = () => {
 				</button>
 			</form>
 		</div>
+		</Loader>
 	);
 };
 

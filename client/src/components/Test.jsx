@@ -2,6 +2,7 @@ import React from 'react';
 import { useReducer } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import Loader from '../assets/HOC/Loader';
 import { reducer } from '../assets/reducer/reducer';
 import { arrListProblem } from '../assets/textListProblem/text';
 import { saveTest } from '../storeRedux/reducer/userReducer';
@@ -45,41 +46,43 @@ const Test = () => {
   }
 
   return (
-    <div
-      className={styles.test}
-    >
+    <Loader>
       <div
-        className={styles.test__block}
+        className={styles.test}
       >
-        <h3
-          className={styles.test__header}
-        >
-          Ответьте на следущие вопросы:
-        </h3>
         <div
+          className={styles.test__block}
+        >
+          <h3
+            className={styles.test__header}
+          >
+            Ответьте на следущие вопросы:
+          </h3>
+          <div
 
-          className={styles.test__main}
-        >
-          {
-            stateProblem.data.map(a => <TestRadio
-              key={a.id}
-              id={a.id}
-              problem={a.problem}
-              options={a.options}
-              onChange={handler}
-              type={'radio'}
-            />
-            )
-          }
+            className={styles.test__main}
+          >
+            {
+              stateProblem.data.map(a => <TestRadio
+                key={a.id}
+                id={a.id}
+                problem={a.problem}
+                options={a.options}
+                onChange={handler}
+                type={'radio'}
+              />
+              )
+            }
+          </div>
+          <button
+            className={styles.test__btn}
+            onClick={onSetResults}
+          >
+            Oтправить
+          </button>
         </div>
-        <button
-          className={styles.test__btn}
-          onClick={onSetResults}
-        >
-          Oтправить
-        </button>
       </div>
-    </div>
+    </Loader>
   );
 };
 
